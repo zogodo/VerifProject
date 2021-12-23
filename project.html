@@ -41,9 +41,9 @@
             var val = "";
             if (!isNaN(Object.keys(inss[ins])[0])) {
                 var userData = {
-                    value: inss[ins],
-                    minMax: 'XXX',
-                    val10: val.toString(10),
+                    value: inss[ins][0],
+                    minMax: inss[ins][1],
+                    val10: inss[ins][1],
                 };
                 data.push({text: ins, icon: "jstree-file", data: userData});
             } else {
