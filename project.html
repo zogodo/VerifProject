@@ -42,7 +42,7 @@
             var val = "";
             if (Object.keys(inss[ins])[0] == "redmine_id") {
                 var userData = {
-                    redmine_id: inss[ins].redmine_id,
+                    redmine_id: `<a href="http://10.23.3.201/redmine/issues/${inss[ins].redmine_id}" target="_blank">#${inss[ins].redmine_id}</a>`,
                     priority: inss[ins].priority,
                     val10: inss[ins].priority,
                 };
@@ -96,7 +96,7 @@
             grid: {
                 columns: [
                     {width: "auto", header: "Nodes",title:"_DATA_"},
-                    {width: 110, cellClass: "col1", value: "redmine_id", header: "RedmineID", title:"redmine_id", valueClass:"spanclass"},
+                    {width: 110, cellClass: "col1", value: "redmine_id", header: "Redmine", title:"redmine_id", valueClass:"spanclass"},
                     {width: 110, cellClass: "col1", value: "priority", header: "优先级", title:"priority", valueClass:"spanclass"},
                 ],
                 resizable:true,
