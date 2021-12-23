@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Project</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" /> -->
+    <link rel="stylesheet" href="style.min.css" />
     <style>
         * {font-family: monospace; font-size: 16px;}
         ul {padding-inline-start: 20px; list-style-type: disclosure-closed; line-height: 20px;}
@@ -54,8 +55,10 @@
     }
 </script>
 
-<script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.2/jstree.min.js"></script>
+<!-- <script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script> -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.2/jstree.min.js"></script> -->
+<script type='text/javascript' src='jquery-2.1.0.js'></script>
+<script type="text/javascript" src="jstree.min.js"></script>
 <script type="text/javascript" src="jstreegrid.js"></script>
 <script type="text/javascript">
     function LoadData(data) {
@@ -67,6 +70,7 @@
         });
         tree.on('update_cell.jstree-grid',function (e,data) {
             console.log("树节点被修改");
+            console.log(instances);
         });
         tree.on('select_node.jstree', function(e, data) {
             console.log("点击树节点");
