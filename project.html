@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <style>
+        * {font-family: monospace; font-size: 16px;}
+        ul {padding-inline-start: 20px; list-style-type: disclosure-closed; line-height: 20px;}
+        .open {list-style-type: disclosure-open;}
+        .circle {list-style-type: circle;}
+        .circle span {width: 200px; display: inline-table;}
+        #path {position: fixed; right: 0; bottom: 0;padding: 20px;background: white;border: black solid 1px;text-align: right;}
+    </style>
+</head>
+<body>
+    <input type="file" id="file1" />
+    <button onclick="LoadFile()">Load</button>
+    <input type="text" id="search"></input>
+    <button id="search-btn">Search</button>
+    <div id="jstree1">
+        <div id="jstree"></div>
+    </div>
+    <div id="path">/path</div>
+</body>
+
+<script>
+    var file1 = document.getElementById("file1");
+    var myTree = document.getElementById("my-tree");
+    var instances;
+    function LoadFile() {
+        var reader = new FileReader();
+        reader.onload = function() {
+            instances = JSON.parse(reader.result);
+            LoadData(ConvertData(instances));
+        }
+        reader.readAsText(file1.files[0]);
+    }
+    function ConvertData(inss) {
+        var data = [];
+        for (let ins in inss) {
+            var val = "";
+            if (!isNaN(Object.keys(inss[ins])[0])) {
+                val = Object.keys(inss[ins]).reduce(function(sum, key) {
+                    return sum | BigInt(inss[ins][key]) << BigInt(key);
+                }, BigInt(0));
+                var len = Object.keys(inss[ins]).length;
+                var minKey = 0;
+                var maxKey = 0;
+                var first = true;
+                for (let key in inss[ins]) {
+                    var keyInt = parseInt(key);
+                    if (first) {
+                        minKey = keyInt;
+                        maxKey = keyInt;
+                    }
+                    first = false;
+                    if (keyInt > maxKey) {
+                        maxKey = keyInt;
+                    }
+                    if (keyInt < minKey) {
+                        minKey = keyInt;
+                    }
+                }
+                var userData = {
+                    value: len+"'h"+val.toString(16),
+                    minMax: '['+minKey+"'"+maxKey+']',
+                    val10: val.toString(10),
+                    raw: inss[ins],
+                    minKey: minKey,
+                    maxKey: maxKey
+                };
+                data.push({text: ins, icon: "jstree-file", data: userData});
+            } else {
+                data.push({text: ins, data: {value: val}, children:ConvertData(inss[ins])});
+            }
+        }
+        return data;
+    }
+</script>
+
+<script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.2/jstree.min.js"></script>
+<script type="text/javascript" src="jstreegrid.js"></script>
+<script type="text/javascript">
+    function LoadData(data) {
+        var tree = $("div#jstree").bind("loaded_grid.jstree",function(){
+            $("span#status").text("loaded");
+        });
+        tree.on("select_cell.jstree-grid",function (e,data) {
+            $("span#clicked").html("clicked "+data.column+" of value "+data.value);
+        });
+        tree.on('update_cell.jstree-grid',function (e,data) {
+            $("span#changed").html("changed "+data.col+" from "+data.old+" to "+data.value);
+        });
+        tree.on('select_node.jstree', function(e, data) {
+            var path = $("#jstree").jstree(true).get_path(data.node, "/");
+            var val10 = data.node.data.val10;
+            var raw = ""
+            if (data.node.data.raw != null) {
+                for (var k = data.node.data.minKey; k <= data.node.data.maxKey; k++) {
+                    var key = k.toString();
+                    var apd = data.node.data.raw[key];
+                    if (apd == null) {
+                        apd = "X";
+                    }
+                    raw = apd + raw;
+                }
+            }
+            $("#path").html(path + "<br>" + val10 + "<br>" + raw);
+        })
+        $("div#jstree").jstree({
+            plugins: ["themes","json","grid","dnd","contextmenu","search","sort"],
+            core: {
+                data: data
+            },
+            grid: {
+                columns: [
+                    {width: "auto", header: "Nodes",title:"_DATA_"},
+                    {width: 110, cellClass: "col1", value: "value", header: "Value", title:"value", valueClass:"spanclass"},
+                    {width: 110, cellClass: "col1", value: "minMax", header: "[start'end]", title:"minMax", valueClass:"spanclass"},
+                ],
+                resizable:true,
+                draggable:false,
+                stateful:true,
+                contextmenu:true,
+                gridcontextmenu: function (grid,tree,node,val,col,t,target) {
+                    return {
+                        "edit": {
+                            label: "Change value",
+                            icon: "glyphicon glyphicon-pencil",
+                            "action": function (data) {
+                                var obj = t.get_node(node);
+                                grid._edit(obj,col,target);
+                            }
+                        }
+                    }
+                }
+            },
+            dnd: {
+                drop_finish : function () {
+                },
+                drag_finish : function () {
+                },
+                drag_check : function (data) {
+                return {
+                    after : true,
+                    before : true,
+                    inside : true
+                };
+                }
+            }
+        })
+        .on('loaded.jstree', function() {
+            $("div#jstree").jstree();
+        });
+        $("a#change").click(function(){
+            var tree = $("div#jstree").jstree(),
+            nodename = tree.get_node("#").children[0], node = tree.get_node(nodename),
+            val = parseInt(node.data.size);
+            node.data.size = node.data.size*2;
+            tree.trigger("change_node.jstree",nodename);
+
+            return(false);
+        });
+        $("a#refresh").click(function(){
+            var tree = $("div#jstree").jstree();
+            var data = [{
+                text: "Root 1",
+                data: {price: "$5.00", size: "4"}
+            }];
+            tree.settings.core.data = data;
+            tree.refresh();
+            return(false);
+        });
+        $("button#search-btn").click(function (e) {
+            var tree = $("div#jstree").jstree();
+            tree.search($("input#search").val());
+        });
+    }
+</script>
+</html>
