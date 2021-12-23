@@ -61,13 +61,13 @@
 <script type="text/javascript" src="jstree.min.js"></script>
 <script type="text/javascript" src="jstreegrid.js"></script>
 <script type="text/javascript">
-    function ChangeInss(inss, paths, len, key, val, col) {
-        if (len == 0) {
+    function ChangeInss(inss, paths, val, col) {
+        if (paths.length == 0) {
             inss[col] = val;
             return;
         }
-        var l = paths.length;
-        ChangeInss(inss[key], paths, len-1, paths[l-len+1], val, col);
+        var key = paths.splice(0, 1);
+        ChangeInss(inss[key], paths, val, col);
     }
     function LoadData(data) {
         var tree = $("div#jstree").bind("loaded_grid.jstree",function(){
@@ -79,8 +79,7 @@
         tree.on('update_cell.jstree-grid',function (e,data) {
             console.log("树节点被修改");
             var paths = $("#jstree").jstree(true).get_path(data.node);
-            var len = paths.length;
-            ChangeInss(instances, paths, len, paths[0], data.value, data.col);
+            ChangeInss(instances, paths, data.value, data.col);
             console.log(instances);
         });
         tree.on('select_node.jstree', function(e, data) {
