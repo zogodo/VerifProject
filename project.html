@@ -40,11 +40,11 @@
         var data = [];
         for (let ins in inss) {
             var val = "";
-            if (!isNaN(Object.keys(inss[ins])[0])) {
+            if (Object.keys(inss[ins])[0] == "redmine_id") {
                 var userData = {
-                    redmine_id: inss[ins][0],
-                    priority: inss[ins][1],
-                    val10: inss[ins][1],
+                    redmine_id: inss[ins].redmine_id,
+                    priority: inss[ins].priority,
+                    val10: inss[ins].priority,
                 };
                 data.push({text: ins, icon: "jstree-file", data: userData});
             } else {
@@ -61,6 +61,14 @@
 <script type="text/javascript" src="jstree.min.js"></script>
 <script type="text/javascript" src="jstreegrid.js"></script>
 <script type="text/javascript">
+    function ChangeInss(inss, paths, len, key, val, col) {
+        if (len == 0) {
+            inss[col] = val;
+            return;
+        }
+        var l = paths.length;
+        ChangeInss(inss[key], paths, len-1, paths[l-len+1], val, col);
+    }
     function LoadData(data) {
         var tree = $("div#jstree").bind("loaded_grid.jstree",function(){
             console.log("加载树");
@@ -70,6 +78,9 @@
         });
         tree.on('update_cell.jstree-grid',function (e,data) {
             console.log("树节点被修改");
+            var paths = $("#jstree").jstree(true).get_path(data.node);
+            var len = paths.length;
+            ChangeInss(instances, paths, len, paths[0], data.value, data.col);
             console.log(instances);
         });
         tree.on('select_node.jstree', function(e, data) {
