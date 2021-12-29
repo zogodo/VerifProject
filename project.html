@@ -39,16 +39,17 @@
     function ConvertData(inss) {
         var data = [];
         for (let ins in inss) {
-            var val = "";
-            if (Object.keys(inss[ins])[0] == "redmine_id") {
-                var userData = {
-                    redmine_id: `<a href="http://10.23.3.201/redmine/issues/${inss[ins].redmine_id}" target="_blank">#${inss[ins].redmine_id}</a>`,
-                    priority: inss[ins].priority,
-                    val10: inss[ins].priority,
-                };
+            var userData = {
+                redmine_id: `<a href="http://10.23.3.201/redmine/issues/${inss[ins].redmine_id}" target="_blank">#${inss[ins].redmine_id}</a>`,
+                priority: inss[ins].priority,
+                val10: inss[ins].priority,
+            };
+            delete inss[ins].redmine_id;
+            delete inss[ins].priority;
+            if (inss[ins].is_leaf) {
                 data.push({text: ins, icon: "jstree-file", data: userData});
             } else {
-                data.push({text: ins, data: {value: val}, children:ConvertData(inss[ins])});
+                data.push({text: ins, data: userData, children:ConvertData(inss[ins])});
             }
         }
         return data;

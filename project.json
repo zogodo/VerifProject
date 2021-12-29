@@ -1,23 +1,34 @@
 {
-    "任务0": {"redmine_id": "0", "priority": "XXX"},
+    "任务0": {"is_leaf": true, "redmine_id": "0", "priority": "XXX"},
     "任务1": {
+        "redmine_id": "0",
+        "priority": "XXX",
         "任务1.1": {
-            "任务1.1.1": {"redmine_id": "111", "priority": "XXX"},
-            "任务1.1.2": {"redmine_id": "112", "priority": "XXX"},
-            "任务1.1.3": {"redmine_id": "113", "priority": "XXX"},
-            "任务1.1.4": {"redmine_id": "114", "priority": "XXX"}
+            "redmine_id": "0",
+            "priority": "XXX",
+            "任务1.1.1": {"is_leaf": true, "redmine_id": "10", "priority": "XXX"},
+            "任务1.1.2": {"is_leaf": true, "redmine_id": "112", "priority": "A"},
+            "任务1.1.3": {"is_leaf": true, "redmine_id": "1", "priority": "XXX"},
+            "任务1.1.4": {"is_leaf": true, "redmine_id": "114", "priority": "XXX"}
         },
         "任务1.2": {
-            "任务1.2.1": {"redmine_id": "121", "priority": "XXX"},
-            "任务1.2.2": {"redmine_id": "122", "priority": "XXX"}
+            "redmine_id": "0",
+            "priority": "XXX",
+            "任务1.2.1": {"is_leaf": true, "redmine_id": "789", "priority": "XXX"},
+            "任务1.2.2": {"is_leaf": true, "redmine_id": "122", "priority": "B"}
         },
-        "任务1.3": {"redmine_id": "13", "priority": "XXX"}
+        "任务1.3": {"is_leaf": true, "redmine_id": "13", "priority": "XXX"},
+        "任务1.4": {"is_leaf": true, "redmine_id": "11", "priority": "XXX"}
     },
     "任务2": {
-        "任务2.1": {"redmine_id": "21", "priority": "XXX"},
+        "redmine_id": "0",
+        "priority": "XXX",
+        "任务2.1": {"is_leaf": true, "redmine_id": "21", "priority": "XXX"},
         "任务2.2": {
-            "任务2.2.1": {"redmine_id": "221", "priority": "XXX"}
+            "redmine_id": "0",
+            "priority": "XXX",
+            "任务2.2.1": {"is_leaf": true, "redmine_id": "221", "priority": "XXX"}
         },
-        "任务2.3": {"redmine_id": "23", "priority": "XXX"}
+        "任务2.3": {"is_leaf": true, "redmine_id": "23", "priority": "XXX"}
     }
 }
