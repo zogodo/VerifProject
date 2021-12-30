@@ -86,12 +86,19 @@
         tree.on('select_node.jstree', function(e, data) {
             console.log("点击树节点");
             var path = $("#jstree").jstree(true).get_path(data.node, "/");
+            if (!data.node || !data.node.data) {
+                return;
+            }
             var val10 = data.node.data.val10;
             $("#path_div").html(path + "<br>" + val10);
+        })
+        tree.on("create_node.jstree", function (e, data) {
+            console.log("创建节点");
         })
         $("div#jstree").jstree({
             plugins: ["themes","json","grid","dnd","contextmenu","search","sort"],
             core: {
+                check_callback: true,
                 data: data
             },
             grid: {
