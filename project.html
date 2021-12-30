@@ -94,6 +94,16 @@
         })
         tree.on("create_node.jstree", function (e, data) {
             console.log("创建节点");
+            var parent = data.instance.get_node(data.parent);
+            parent.icon = "jstree-folder";
+            data.node.icon = "jstree-file";
+            var userData = {
+                redmine_id: `<a href="http://10.23.3.201/redmine/issues/000" target="_blank">#000</a>`,
+                priority: "A",
+                val10: "B",
+            };
+            data.node.data = userData;
+
         })
         $("div#jstree").jstree({
             plugins: ["themes","json","grid","dnd","contextmenu","search","sort"],
