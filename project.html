@@ -61,6 +61,7 @@
 <script type='text/javascript' src='jquery-2.1.0.js'></script>
 <script type="text/javascript" src="jstree.min.js"></script>
 <script type="text/javascript" src="jstreegrid.js"></script>
+<script type="text/javascript" src="my_tool.js"></script>
 <script type="text/javascript">
     function ChangeInss(inss, paths, val, col) {
         if (paths.length == 0) {
@@ -103,7 +104,9 @@
                 val10: "B",
             };
             data.node.data = userData;
-
+            doAjax0("https://zogodo.github.io/md/blog.md", function(re) {
+                data.node.data.priority = "Z";
+            });
         })
         $("div#jstree").jstree({
             plugins: ["themes","json","grid","dnd","contextmenu","search","sort"],
