@@ -1,34 +1,29 @@
 {
-    "任务0": {"is_leaf": true, "redmine_id": "0", "priority": "XXX"},
-    "任务1": {
+    "tree_任务0": {"is_leaf": true, "redmine_id": "0"},
+    "tree_任务1": {
         "redmine_id": "1",
-        "priority": "AAA",
-        "任务1.1": {
+        "tree_任务1.1": {
             "redmine_id": "11",
-            "priority": "XXX",
-            "任务1.1.1": {"is_leaf": true, "redmine_id": "111", "priority": "BBB"},
-            "任务1.1.2": {"is_leaf": true, "redmine_id": "112", "priority": "YYY"},
-            "任务1.1.3": {"is_leaf": true, "redmine_id": "113", "priority": "AAA"},
-            "任务1.1.4": {"is_leaf": true, "redmine_id": "114", "priority": "XXX"}
+            "tree_任务1.1.1": {"is_leaf": true, "redmine_id": "111"},
+            "tree_任务1.1.2": {"is_leaf": true, "redmine_id": "112"},
+            "tree_任务1.1.3": {"is_leaf": true, "redmine_id": "113"},
+            "tree_任务1.1.4": {"is_leaf": true, "redmine_id": "114"}
         },
-        "任务1.2": {
+        "tree_任务1.2": {
             "redmine_id": "12",
-            "priority": "XXX",
-            "任务1.2.1": {"is_leaf": true, "redmine_id": "121", "priority": "XXX"},
-            "任务1.2.2": {"is_leaf": true, "redmine_id": "122", "priority": "QQQ"}
+            "tree_任务1.2.1": {"is_leaf": true, "redmine_id": "121"},
+            "tree_任务1.2.2": {"is_leaf": true, "redmine_id": "122"}
         },
-        "任务1.3": {"is_leaf": true, "redmine_id": "13", "priority": "PPP"},
-        "任务1.4": {"is_leaf": true, "redmine_id": "11", "priority": "XXX"}
+        "tree_任务1.3": {"is_leaf": true, "redmine_id": "13"},
+        "tree_任务1.4": {"is_leaf": true, "redmine_id": "11"}
     },
-    "任务2": {
+    "tree_任务2": {
         "redmine_id": "2",
-        "priority": "BBB",
-        "任务2.1": {"is_leaf": true, "redmine_id": "21", "priority": "XXX"},
-        "任务2.2": {
+        "tree_任务2.1": {"is_leaf": true, "redmine_id": "21"},
+        "tree_任务2.2": {
             "redmine_id": "22",
-            "priority": "XXX",
-            "任务2.2.1": {"is_leaf": true, "redmine_id": "221", "priority": "XXX"}
+            "tree_任务2.2.1": {"is_leaf": true, "redmine_id": "221"}
         },
-        "任务2.3": {"is_leaf": true, "redmine_id": "23", "priority": "XXX"}
+        "tree_任务2.3": {"is_leaf": true, "redmine_id": "23"}
     }
 }
