@@ -1,29 +1,31 @@
 {
-    "tree_任务0": {"is_leaf": true, "redmine_id": "0"},
-    "tree_任务1": {
-        "redmine_id": "1",
-        "tree_任务1.1": {
-            "redmine_id": "11",
-            "tree_任务1.1.1": {"is_leaf": true, "redmine_id": "111"},
-            "tree_任务1.1.2": {"is_leaf": true, "redmine_id": "112"},
-            "tree_任务1.1.3": {"is_leaf": true, "redmine_id": "113"},
-            "tree_任务1.1.4": {"is_leaf": true, "redmine_id": "114"}
+    "任务0": {"tree_assigned_to": "周国栋"},
+    "任务1": {
+        "tree_assigned_to": "周国栋",
+        "任务1.1": {
+            "tree_assigned_to": "周国栋",
+            "任务1.1.1": {"tree_assigned_to": "周国栋"},
+            "任务1.1.2": {"tree_assigned_to": "周国栋"},
+            "任务1.1.3": {"tree_assigned_to": "周国栋"},
+            "任务1.1.4": {"tree_assigned_to": "周国栋"}
         },
-        "tree_任务1.2": {
-            "redmine_id": "12",
-            "tree_任务1.2.1": {"is_leaf": true, "redmine_id": "121"},
-            "tree_任务1.2.2": {"is_leaf": true, "redmine_id": "122"}
+        "任务1.2": {
+            "tree_assigned_to": "周国栋",
+            "任务1.2.1": {"tree_assigned_to": "周国栋"},
+            "任务1.2.2": {"tree_assigned_to": "周国栋"}
         },
-        "tree_任务1.3": {"is_leaf": true, "redmine_id": "13"},
-        "tree_任务1.4": {"is_leaf": true, "redmine_id": "11"}
+        "任务1.3": {"tree_assigned_to": "周国栋"},
+        "任务1.4": {"tree_assigned_to": "周国栋"}
     },
-    "tree_任务2": {
-        "redmine_id": "2",
-        "tree_任务2.1": {"is_leaf": true, "redmine_id": "21"},
-        "tree_任务2.2": {
-            "redmine_id": "22",
-            "tree_任务2.2.1": {"is_leaf": true, "redmine_id": "221"}
+    "任务2": {
+        "tree_assigned_to": "周国栋",
+        "任务2.1": {"tree_assigned_to": "周国栋"},
+        "任务2.2": {
+            "tree_assigned_to": "周国栋",
+            "star_date": "2022-01-25",
+            "due_date": "2022-02-25",
+            "任务2.2.1": {"tree_assigned_to": "周国栋", "star_date": "2022-01-25", "due_date": "2022-02-25"}
         },
-        "tree_任务2.3": {"is_leaf": true, "redmine_id": "23"}
+        "任务2.3": {"tree_assigned_to": "周国栋", "star_date": "2022-01-25", "due_date": "2022-02-25"}
     }
 }
