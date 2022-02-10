@@ -59,7 +59,7 @@
 <!-- <script type='text/javascript' src='http://code.jquery.com/jquery-2.1.0.js'></script> -->
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.2/jstree.min.js"></script> -->
 <script type='text/javascript' src='jquery-2.1.0.js'></script>
-<script type="text/javascript" src="jstree.min.js"></script>
+<script type="text/javascript" src="jstree.js"></script>
 <script type="text/javascript" src="jstreegrid.js"></script>
 <script type="text/javascript" src="my_tool.js"></script>
 <script type="text/javascript">
@@ -116,19 +116,22 @@
             },
             //https://stackoverflow.com/questions/21096141/jstree-and-context-menu-modify-items
             contextmenu: {
-                items: function($node) {
+                items: function(node) {
                     return {
                         Create: {
                             label: "Create2",
                             action: function (obj) { 
-                                $node = tree.jstree().create_node($node);
-                                tree.jstree().edit($node);
+                                node = tree.jstree().create_node(node);
+                                tree.jstree().edit(node);
                             }
                         },
                         Rename: {
                             label: "Rename2",
                             action: function (obj) { 
-                                tree.jstree().edit($node);
+                                var xxx = tree.jstree();
+                                node.data.priority = "XX";
+                                xxx.redraw_node(node);
+                                // xxx.edit(node);
                             }
                         },
                     };
