@@ -114,6 +114,26 @@
                 check_callback: true,
                 data: data
             },
+            //https://stackoverflow.com/questions/21096141/jstree-and-context-menu-modify-items
+            contextmenu: {
+                items: function($node) {
+                    return {
+                        Create: {
+                            label: "Create2",
+                            action: function (obj) { 
+                                $node = tree.jstree().create_node($node);
+                                tree.jstree().edit($node);
+                            }
+                        },
+                        Rename: {
+                            label: "Rename2",
+                            action: function (obj) { 
+                                tree.jstree().edit($node);
+                            }
+                        },
+                    };
+                }
+            },
             grid: {
                 columns: [
                     {width: "auto", header: "Nodes",title:"_DATA_"},
