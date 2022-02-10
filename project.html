@@ -28,6 +28,31 @@
     var file1 = document.getElementById("file1");
     var myTree = document.getElementById("my-tree");
     var instances;
+    var proData = {
+        "tree_0 S5000": {
+            "redmine_id": "111",
+            "is_leaf": "true"
+        },
+        "tree_1 逻辑设计": {
+            "redmine_id": "111",
+            "tree_1.1 Core": {
+                "redmine_id": "111",
+                "is_leaf": "true"
+            },
+            "tree_1.2 Coretile": {
+                "redmine_id": "111",
+                "is_leaf": "true"
+            },
+            "tree_1.3 NoC": {
+                "redmine_id": "111",
+                "is_leaf": "true"
+            }
+        },
+        "tree_2 后端物理设计": {
+            "redmine_id": "111",
+            "is_leaf": "true"
+        }
+    };
     function LoadFile() {
         var reader = new FileReader();
         reader.onload = function() {
@@ -71,6 +96,7 @@
         var key = paths.splice(0, 1);
         ChangeInss(inss[key], paths, val, col);
     }
+    LoadData(ConvertData(proData));
     function LoadData(data) {
         var tree = $("div#jstree").bind("loaded_grid.jstree",function(){
             console.log("加载树");
